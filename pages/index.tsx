@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from "tabler-icons-react";
 import UserNameForm from "../components/NameForm";
 import ContactForm from "../components/ContactForm";
 import { useAppStore } from "../hooks/app.provider";
+import LoginForm from "../components/LoginInfoForm"
 
 const Home: NextPage = () => {
   const { stepNo, setStepNo } = useAppStore();
@@ -35,7 +36,7 @@ const Home: NextPage = () => {
               </p>
               <hr className="h-px my-3 bg-gray-200 border-0" />
               {
-                stepNo == 1 ? <UserNameForm /> : stepNo == 2 ? <ContactForm /> : "Login Info"
+                stepNo == 1 ? <UserNameForm /> : stepNo == 2 ? <ContactForm /> : <LoginForm />
               }
             </div>
             <div>
