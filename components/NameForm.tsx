@@ -25,6 +25,7 @@ function UserNameForm() {
       {fields.map((field: any) => {
         return (
           <InputField
+            placeholder={field.label}
             key={field.id}
             value={field.name}
             onChange={field.onChange}
