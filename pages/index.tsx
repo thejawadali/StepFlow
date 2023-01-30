@@ -3,6 +3,7 @@ import Head from "next/head";
 import Stepper from "../components/Stepper";
 import { ChevronLeft, ChevronRight } from "tabler-icons-react";
 import UserNameForm from "../components/NameForm";
+import ContactForm from "../components/ContactForm";
 import { useAppStore } from "../hooks/app.provider";
 
 const Home: NextPage = () => {
@@ -33,7 +34,9 @@ const Home: NextPage = () => {
                 impedit
               </p>
               <hr className="h-px my-3 bg-gray-200 border-0" />
-              <UserNameForm />
+              {
+                stepNo == 1 ? <UserNameForm /> : stepNo == 2 ? <ContactForm /> : "Login Info"
+              }
             </div>
             <div>
               {stepNo > 1 && (
