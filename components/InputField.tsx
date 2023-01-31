@@ -7,10 +7,8 @@ interface Props {
   placeholder?: string;
   value: string;
   class?: string;
-  touched?: boolean;
-  error?: string;
+  error?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 function InputField(props: Props) {
@@ -20,7 +18,6 @@ function InputField(props: Props) {
         {props.label}:
       </label>
       <input
-        onBlur={props.handleBlur}
         id={props.id}
         type={props.type || "text"}
         placeholder={props.placeholder}
@@ -29,8 +26,8 @@ function InputField(props: Props) {
         className={`border text-gray-600 px-2 py-1 rounded outline-none w-full text-sm ${
           props.class
         } ${
-          props.error && props.touched
-            ? "border-red-500"
+          props.error
+            ? "border-red-500 bg-red-50"
             : "focus:border-gray-500"
         }`}
       />

@@ -8,14 +8,15 @@ import { useAppStore } from "../hooks/app.provider";
 import LoginForm from "../components/LoginInfoForm";
 
 const Home: NextPage = () => {
-  const { stepNo, setStepNo, submitForm } = useAppStore();
+  const { stepNo, setStepNo, isError, increaseStep, submitForm } =
+    useAppStore();
   return (
     <>
       <Head>
         <title>Sign Up</title>
       </Head>
       <div className="w-full min-h-screen flex justify-center items-center py-10 bg-gradient-to-r from-green-300 to-blue-500 ">
-        <div className="w-1/2">
+        <div className="w-[98%] md:w-[40%]">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -59,7 +60,7 @@ const Home: NextPage = () => {
               )}
               {stepNo < 3 && (
                 <button
-                  onClick={() => setStepNo(stepNo + 1)}
+                  onClick={increaseStep}
                   type="submit"
                   className="text-green-500 text-sm flex items-center duration-300 hover:text-green-600 float-right"
                 >

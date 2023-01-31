@@ -2,7 +2,7 @@ import { useAppStore } from "../hooks/app.provider";
 
 
 export default function Stepper() {
-  const { stepNo, setStepNo } = useAppStore();
+  const { stepNo, increaseStep } = useAppStore();
   return (
     <div className="my-5 flex justify-center w-full ">
       <ol role="list" className="flex items-center">
@@ -15,18 +15,17 @@ export default function Stepper() {
               <div className="absolute inset-0 flex items-center">
                 <div className={`h-0.5 w-full ${ stepNo > step ? "bg-green-600" : "bg-gray-200"}`}/>
               </div>
-              <button
-                onClick={() => setStepNo(step)}
-                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${
+              <span
+                className={`relative flex h-6 w-6 md:h-8 md:w-8 items-center justify-center rounded-full ${
                   stepNo > step
-                    ? "bg-green-600 hover:bg-green-900 text-white"
+                    ? "bg-green-600 text-white"
                     : stepNo === step
                     ? "border-2 border-green-600 bg-white"
-                    : "bg-white border-2 border-gray-200 hover:border-gray-400"
+                    : "bg-white border-2 border-gray-200"
                 }`}
               >
-                <span className="text-sm">{step}</span>
-              </button>
+                <span className="text-xs md:text-sm">{step}</span>
+              </span>
             </>
           </li>
         ))}

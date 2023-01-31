@@ -60,15 +60,56 @@ const reducer = (
 
 export const AppProvider = ({ children }: any) => {
   const [stepNo, setStepNo] = useState<number>(1);
-  const [formData, setFormData] = useReducer<any>(reducer, initialState);
+  const [formData, setFormData] = useReducer(reducer, initialState);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const submitForm = () => {
-    alert("form submitted :)")
-    console.log(formData);
+    if (formData.userName && formData.password) {
+      setIsError(false);
+      alert("form submitted :)");
+      console.log(formData);
+    } else {
+      setIsError(true);
+    }
   };
 
+  function increaseStep() {
+    switch (stepNo) {
+      case 1:
+        // check if firstName and last name are not empty
+        if (formData.firstName && formData.lastName) {
+          setStepNo(stepNo + 1);
+          setIsError(false);
+        } else {
+          setIsError(true);
+        }
+        break;
+      case 2:
+        // check if email and phoneNumer are not empty
+        if (formData.email && formData.phoneNumber) {
+          setStepNo(stepNo + 1);
+          setIsError(false);
+        } else {
+          setIsError(true);
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
   return (
-    <AppContext.Provider value={{ stepNo, setStepNo, submitForm, formData, setFormData }}>
+    <AppContext.Provider
+      value={{
+        stepNo,
+        setStepNo,
+        increaseStep,
+        submitForm,
+        formData,
+        isError,
+        setFormData,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

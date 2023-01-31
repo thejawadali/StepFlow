@@ -3,11 +3,12 @@ import { ActionTypes, useAppStore } from "../hooks/app.provider"
 import InputField from "./InputField";
 
 function ContactForm() {
-  const { formData, setFormData } = useAppStore();
+  const { formData, setFormData, isError } = useAppStore();
   return (
-    <fieldset className="w-full px-20">
+    <fieldset className="w-full px-2 md:px-12">
       <InputField
         placeholder="Enter Email..."
+        error={(isError && !formData.email)}
         value={formData.email}
         onChange={(e) => setFormData({ type: ActionTypes.CHANGE_EMAIL, payload: e.target.value })}
         label="Email"
@@ -15,6 +16,7 @@ function ContactForm() {
       />
       <InputField
         placeholder="Enter Phone Number..."
+        error={(isError && !formData.phoneNumber)}
         value={formData.phoneNumber}
         onChange={(e) => setFormData({ type: ActionTypes.CHANGE_PHONE_NUMBER, payload: e.target.value })}
         label="Phone number"
