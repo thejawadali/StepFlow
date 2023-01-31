@@ -5,7 +5,7 @@ import InputField from "./InputField";
 function ContactForm() {
   const { formData, setFormData } = useAppStore();
   return (
-    <fieldset className="w-full px-12">
+    <fieldset className="w-full px-20">
       <InputField
         placeholder="Enter Email..."
         value={formData.email}

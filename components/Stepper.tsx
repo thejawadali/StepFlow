@@ -1,52 +1,36 @@
-import { Check, User } from "tabler-icons-react";
+import { useAppStore } from "../hooks/app.provider";
 
-enum Stutus {
-  COMPLETE = "complete",
-  CURRENT = "current",
-  UPCOMING = "upcoming",
-}
 
-const steps = [
-  { name: "Name", icon: User, href: "#", status: Stutus.CURRENT },
-  { name: "Step 2", icon: User, href: "#", status: Stutus.UPCOMING },
-  { name: "Step 3", icon: User, href: "#", status: Stutus.UPCOMING },
-  { name: "Step 4", icon: User, href: "#", status: Stutus.UPCOMING },
-  { name: "Step 5", icon: User, href: "#", status: Stutus.UPCOMING },
-];
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
-
-function Stepper() {
+export default function Stepper() {
+  const { stepNo, setStepNo } = useAppStore();
   return (
-    <ol role="list" className="inline-flex items-center">
-      {steps.map((step, stepIdx) => (
-        <li
-          key={step.name}
-          className={`relative`}
-          // className={classNames(
-          //   stepIdx !== steps.length - 1 ? "pr-8 sm:pr-20" : "",
-          //   "relative"
-          // )}
-        >
-          <>
-            <div
-              className="absolute inset-0 flex items-center"
-              aria-hidden="true"
-            >
-              {/* line */}
-              <div className={`h-0.5 w-full ${step.status === Stutus.UPCOMING ? 'bg-white': 'bg-gray-800'}`} />
-            </div>
-            <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-gray-800">
-              <User className="h-5 w-5 text-white" />
-              {/* <span className="absolute">{step.name}</span> */}
-            </span>
-          </>
-        </li>
-      ))}
-    </ol>
+    <div className="my-5 flex justify-center w-full ">
+      <ol role="list" className="flex items-center">
+        {[1, 2, 3].map((step) => (
+          <li
+            key={step}
+            className={`relative ${step !== 3 && "pr-8 sm:pr-20"}`}
+          >
+            <>
+              <div className="absolute inset-0 flex items-center">
+                <div className={`h-0.5 w-full ${ stepNo > step ? "bg-green-600" : "bg-gray-200"}`}/>
+              </div>
+              <button
+                onClick={() => setStepNo(step)}
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full ${
+                  stepNo > step
+                    ? "bg-green-600 hover:bg-green-900 text-white"
+                    : stepNo === step
+                    ? "border-2 border-green-600 bg-white"
+                    : "bg-white border-2 border-gray-200 hover:border-gray-400"
+                }`}
+              >
+                <span className="text-sm">{step}</span>
+              </button>
+            </>
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
-
-export default Stepper;

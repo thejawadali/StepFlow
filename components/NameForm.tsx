@@ -5,7 +5,7 @@ function UserNameForm() {
   const { formData, setFormData } = useAppStore();
 
   return (
-    <fieldset className="w-full px-12">
+    <fieldset className="w-full px-20">
       <InputField
         placeholder="Enter First Name..."
         value={formData.firstName}
