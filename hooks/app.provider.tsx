@@ -1,14 +1,21 @@
-import { createContext, Provider, useContext, useEffect, useReducer, useState } from "react";
+import {
+  createContext,
+  Provider,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 const AppContext = createContext<any>(null);
 
 export interface IUser {
-  firstName: string
-  lastName: string
-  email: string
-  phoneNumber: string
-  userName: string
-  password: string
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  userName: string;
+  password: string;
 }
 
 export enum ActionTypes {
@@ -27,9 +34,12 @@ const initialState: IUser = {
   phoneNumber: "",
   userName: "",
   password: "",
-}
+};
 
-const reducer = (state:IUser, action: { type: ActionTypes; payload: string }) => {
+const reducer = (
+  state: IUser,
+  action: { type: ActionTypes; payload: string }
+) => {
   switch (action.type) {
     case ActionTypes.CHANGE_FIRST_NAME:
       return { ...state, firstName: action.payload };
@@ -52,12 +62,13 @@ export const AppProvider = ({ children }: any) => {
   const [stepNo, setStepNo] = useState<number>(1);
   const [formData, setFormData] = useReducer<any>(reducer, initialState);
 
-
+  const submitForm = () => {
+    alert("form submitted :)")
+    console.log(formData);
+  };
 
   return (
-    <AppContext.Provider
-      value={{ stepNo, setStepNo, formData, setFormData }}
-    >
+    <AppContext.Provider value={{ stepNo, setStepNo, submitForm, formData, setFormData }}>
       {children}
     </AppContext.Provider>
   );

@@ -5,10 +5,10 @@ import { ChevronLeft, ChevronRight } from "tabler-icons-react";
 import UserNameForm from "../components/NameForm";
 import ContactForm from "../components/ContactForm";
 import { useAppStore } from "../hooks/app.provider";
-import LoginForm from "../components/LoginInfoForm"
+import LoginForm from "../components/LoginInfoForm";
 
 const Home: NextPage = () => {
-  const { stepNo, setStepNo } = useAppStore();
+  const { stepNo, setStepNo, submitForm } = useAppStore();
   return (
     <>
       <Head>
@@ -27,28 +27,39 @@ const Home: NextPage = () => {
             </span>
             <Stepper />
             <div className="text-left my-5">
-              <h2 className="text-gray-700">{
-                stepNo == 1 ? "Name" : stepNo == 2 ? "Contact Info" : "Login Info"
-              }</h2>
+              <h2 className="text-gray-700">
+                {stepNo == 1
+                  ? "Name"
+                  : stepNo == 2
+                  ? "Contact Info"
+                  : "Login Info"}
+              </h2>
               <p className="text-gray-500 text-xs">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit Id,
                 impedit
               </p>
               <hr className="h-px my-3 bg-gray-200 border-0" />
-              {
-                stepNo == 1 ? <UserNameForm /> : stepNo == 2 ? <ContactForm /> : <LoginForm />
-              }
+              {stepNo == 1 ? (
+                <UserNameForm />
+              ) : stepNo == 2 ? (
+                <ContactForm />
+              ) : (
+                <LoginForm />
+              )}
             </div>
             <div>
               {stepNo > 1 && (
-                <button onClick={()=> setStepNo(stepNo - 1)} className="text-green-500 text-sm flex items-center duration-300 hover:text-green-600 float-left">
+                <button
+                  onClick={() => setStepNo(stepNo - 1)}
+                  className="text-green-500 text-sm flex items-center duration-300 hover:text-green-600 float-left"
+                >
                   <ChevronLeft className="w-5 h-5" />
                   <span>Previous</span>
                 </button>
               )}
               {stepNo < 3 && (
                 <button
-                  onClick={()=> setStepNo(stepNo + 1)}
+                  onClick={() => setStepNo(stepNo + 1)}
                   type="submit"
                   className="text-green-500 text-sm flex items-center duration-300 hover:text-green-600 float-right"
                 >
@@ -58,6 +69,7 @@ const Home: NextPage = () => {
               )}
               {stepNo === 3 && (
                 <button
+                  onClick={submitForm}
                   type="submit"
                   className="text-green-500 text-sm flex items-center duration-300 hover:text-green-600 float-right"
                 >
