@@ -7,7 +7,18 @@ module.exports = {
   ],
   mode: "jit",
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "translateX(-10px)" },
+          // "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "translateX(10px)" }
+        }
+      },
+      animation: {
+        wiggle: "wiggle 100ms ease-in-out"
+      }
+    }
   },
   plugins: [
   ],

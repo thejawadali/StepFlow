@@ -8,15 +8,26 @@ import { useAppStore } from "../hooks/app.provider";
 import LoginForm from "../components/LoginInfoForm";
 
 const Home: NextPage = () => {
-  const { stepNo, setStepNo, isError, increaseStep, submitForm } =
-    useAppStore();
+  const {
+    stepNo,
+    setStepNo,
+    setWiggleAnimation,
+    wiggleAnimation,
+    increaseStep,
+    submitForm,
+  } = useAppStore();
   return (
     <>
       <Head>
         <title>Sign Up</title>
       </Head>
       <div className="w-full min-h-screen flex justify-center items-center py-10 bg-gradient-to-r from-green-300 to-blue-500 ">
-        <div className="w-[98%] md:w-[40%]">
+        <div
+          onAnimationEnd={() => setWiggleAnimation(false)}
+          className={`w-[98%] md:w-[40%] ${
+            wiggleAnimation && "animate-wiggle"
+          }`}
+        >
           <form
             onSubmit={(e) => {
               e.preventDefault();

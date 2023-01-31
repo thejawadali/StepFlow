@@ -62,6 +62,7 @@ export const AppProvider = ({ children }: any) => {
   const [stepNo, setStepNo] = useState<number>(1);
   const [formData, setFormData] = useReducer(reducer, initialState);
   const [isError, setIsError] = useState<boolean>(false);
+  const [wiggleAnimation, setWiggleAnimation] = useState(false);
 
   const submitForm = () => {
     if (formData.userName && formData.password) {
@@ -82,6 +83,7 @@ export const AppProvider = ({ children }: any) => {
           setIsError(false);
         } else {
           setIsError(true);
+          setWiggleAnimation(true)
         }
         break;
       case 2:
@@ -91,6 +93,7 @@ export const AppProvider = ({ children }: any) => {
           setIsError(false);
         } else {
           setIsError(true);
+          setWiggleAnimation(true)
         }
         break;
       default:
@@ -105,6 +108,8 @@ export const AppProvider = ({ children }: any) => {
         setStepNo,
         increaseStep,
         submitForm,
+        setWiggleAnimation,
+        wiggleAnimation,
         formData,
         isError,
         setFormData,
