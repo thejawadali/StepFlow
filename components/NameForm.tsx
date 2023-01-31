@@ -1,39 +1,25 @@
-import React from "react";
+import { ActionTypes, useAppStore } from "../hooks/app.provider";
 import InputField from "./InputField";
 
-const fields = [
-  {
-    id: "firsName",
-    label: "First name",
-    value: "jawad",
-    onChange() {
-      console.log(this.value);
-    },
-  },
-  {
-    id: "lastName",
-    label: "Last name",
-    value: "Ali",
-    onChange() {
-      console.log(this.value);
-    },
-  },
-];
 function UserNameForm() {
+  const { formData, setFormData } = useAppStore();
+
   return (
     <fieldset className="w-full px-12">
-      {fields.map((field: any) => {
-        return (
-          <InputField
-            placeholder={field.label}
-            key={field.id}
-            value={field.name}
-            onChange={field.onChange}
-            label={field.label}
-            id={field.id}
-          />
-        );
-      })}
+      <InputField
+        placeholder="Enter First Name..."
+        value={formData.firstName}
+        onChange={(e) => setFormData({ type: ActionTypes.CHANGE_FIRST_NAME, payload: e.target.value })}
+        label="First Name"
+        id="firstName"
+      />
+      <InputField
+        placeholder="Enter Last Name..."
+        value={formData.lastName}
+        onChange={(e) => setFormData({ type: ActionTypes.CHANGE_LAST_NAME, payload: e.target.value })}
+        label="Last Name"
+        id="lastName"
+      />
     </fieldset>
   );
 }

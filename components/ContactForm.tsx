@@ -1,39 +1,25 @@
 import React from "react";
+import { ActionTypes, useAppStore } from "../hooks/app.provider"
 import InputField from "./InputField";
 
-const fields = [
-  {
-    id: "email",
-    label: "Email",
-    value: "",
-    onChange() {
-      
-    },
-  },
-  {
-    id: "phoneNumber",
-    label: "Phone Number",
-    value: "",
-    onChange() {
-      
-    },
-  },
-];
 function ContactForm() {
+  const { formData, setFormData } = useAppStore();
   return (
     <fieldset className="w-full px-12">
-      {fields.map((field: any) => {
-        return (
-          <InputField
-            placeholder={field.label}
-            key={field.id}
-            value={field.name}
-            onChange={field.onChange}
-            label={field.label}
-            id={field.id}
-          />
-        );
-      })}
+      <InputField
+        placeholder="Enter Email..."
+        value={formData.email}
+        onChange={(e) => setFormData({ type: ActionTypes.CHANGE_EMAIL, payload: e.target.value })}
+        label="Email"
+        id="email"
+      />
+      <InputField
+        placeholder="Enter Phone Number..."
+        value={formData.phoneNumber}
+        onChange={(e) => setFormData({ type: ActionTypes.CHANGE_PHONE_NUMBER, payload: e.target.value })}
+        label="Phone number"
+        id="phone-number"
+      />
     </fieldset>
   );
 }
