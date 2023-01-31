@@ -22,10 +22,10 @@ const Home: NextPage = () => {
             }}
             className="bg-white rounded  h-auto text-center p-4"
           >
-            <span className="text-gray-700 font-semibold">
+            <span className="text-gray-700 font-semibold block">
               Create Your Profile
             </span>
-            {/* <Stepper /> */}
+            <Stepper />
             <div className="text-left my-5">
               <h2 className="text-gray-700">{
                 stepNo == 1 ? "Name" : stepNo == 2 ? "Contact Info" : "Login Info"
